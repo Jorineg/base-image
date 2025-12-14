@@ -2,29 +2,23 @@
 
 Shared Docker base image for all IBHelm Python services.
 
+**Docker Hub**: https://hub.docker.com/r/jorineg/ibhelm-base
+
 ## What It Does
 
 1. Starts with Python 3.11 slim
 2. Adds curl + jq for config fetching
 3. Includes smart entrypoint that:
-   - Tries to fetch config from the service agent
+   - Tries to fetch config from the service agent (if available)
    - Falls back to .env file if agent not available
    - Then runs your application
 
-## Building
-
-```bash
-# Build locally (run from this directory)
-docker build -t ibhelm/base:latest .
-
-# Verify it exists
-docker images | grep ibhelm/base
-```
-
 ## Using in Service Dockerfiles
 
+Just use the Docker Hub image - no local building needed!
+
 ```dockerfile
-FROM ibhelm/base:latest
+FROM jorineg/ibhelm-base:latest
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
@@ -34,6 +28,14 @@ COPY src/ ./src/
 ENV SERVICE_NAME=your-service-name
 
 CMD ["python", "-m", "src.app"]
+```
+
+## Building & Pushing (When Updating Base Image)
+
+```bash
+cd base-image
+docker build -t jorineg/ibhelm-base:latest .
+docker push jorineg/ibhelm-base:latest
 ```
 
 ## Environment Variables

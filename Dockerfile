@@ -6,9 +6,9 @@
 
 FROM python:3.11-slim
 
-# Link this image to a GitHub repository (required for ghcr.io)
-LABEL org.opencontainers.image.source=https://github.com/jorineggers/ibhelm-base
-LABEL org.opencontainers.image.description="IBHelm shared base image with config agent support"
+# Image metadata
+LABEL org.opencontainers.image.title="IBHelm Base Image"
+LABEL org.opencontainers.image.description="Shared base image with config agent support"
 
 # Install utilities for config fetching
 # curl: HTTP requests to agent
