@@ -32,11 +32,14 @@ CMD ["python", "-m", "src.app"]
 
 ## Building & Pushing (When Updating Base Image)
 
+Build multi-platform image (required when building on MacBook for Hetzner AMD64):
+
 ```bash
 cd base-image
-docker build -t jorineg/ibhelm-base:latest .
-docker push jorineg/ibhelm-base:latest
+docker buildx build --platform linux/amd64,linux/arm64 -t jorineg/ibhelm-base:latest --push .
 ```
+
+This builds for both ARM64 (MacBook) and AMD64 (Hetzner/HP Z2 G9) and pushes directly.
 
 ## Environment Variables
 

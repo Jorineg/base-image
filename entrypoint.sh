@@ -21,7 +21,7 @@ fetch_config() {
     local response
     
     if response=$(curl -sf --connect-timeout 2 --max-time 5 \
-        "${CONFIG_AGENT_URL}/config/${SERVICE_NAME}" 2>/dev/null); then
+        "${CONFIG_AGENT_URL}/internal/config/${SERVICE_NAME}" 2>/dev/null); then
         
         echo "[ibhelm] Config agent available, loading config..."
         
